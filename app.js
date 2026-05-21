@@ -38,4 +38,40 @@ class ParkingManager extends HTMLElement {
         `;
         this.querySelector('#btnReg').onclick = () => this.registerEntry();
     }
-}   
+}           
+
+// 3. Gestión de Tarifas (Edición)
+class ConfigManager extends HTMLElement {
+    connectedCallback() { this.render(); }
+    render() {
+        const types = storage.get('vehicleTypes');
+        this.innerHTML = `
+            <div class="card">
+                <h3>Gestión de Tipos de Vehículo</h3>
+                <div style="display:flex; gap:10px;">
+                    <input type="text" id="tc" placeholder="Código">
+                    <input type="text" id="tn" placeholder="Nombre (ej. Camión)">
+                    <input type="number" id="tr" placeholder="Tarifa/h">
+                    <button id="btnAddT">Guardar</button>
+                </div>
+                <table>
+                    <thead><tr><th>Cód</th><th>Nombre</th><th>Tarifa/h</th><th>Acción</th></tr></thead>
+                    <tbody>
+                        ${types.map(t => `<tr>
+                            <td>${t.code}</td>
+                            <td>${t.name}</td>
+                            <td>Q${t.rate}</td>
+                            <td><button class="danger" onclick="deleteT('${t.code}')">X</button></td>
+                        </tr>`).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+        this.querySelector('#btnAddT').onclick = () => {
+            const types = storage.get('vehicleTypes');
+            types.push({ code: this.querySelector('#tc').value, name: this.querySelector('#tn').value, rate: this.querySelector('#tr').value });
+            storage.save('vehicleTypes', types);
+            this.render();
+        };
+    }
+}
