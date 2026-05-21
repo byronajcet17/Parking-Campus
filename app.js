@@ -137,5 +137,49 @@ window.addEventListener('login-ok', () => {
         </div>
         <profile-modal id="modal"></profile-modal>
     `;
-}
-)
+
+
+// Funcion del menu
+const updateActive = (id) => {
+    document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+};
+
+document.getElementById('m-reg').onclick = (e) => {
+    updateActive('m-reg');
+    document.getElementById('view').innerHTML = '<parking-manager></parking-manager>';
+};
+
+document.getElementById('m-edit').onclick = (e) => {
+    updateActive('m-edit');
+    document.getElementById('view').innerHTML = '<config-manager></config-manager>';
+};
+
+document.getElementById('m-money').onclick = (e) => {
+    updateActive('m-money');
+    const history = storage.get('parkingServices').filter(s => s.exitTime);
+    const total = history.reduce((acc, s) => acc + s.total, 0);
+    document.getElementById('view').innerHTML = `
+        <div class="card">
+            <h2>Total Ganancias: <span style="color:green">$${total}</span></h2>
+            <p>Histórico de servicios finalizados:</p>
+            <table>
+                <thead><tr><th>Placa</th><th>Entrada</th><th>Salida</th><th>Total</th></tr></thead>
+                <tbody>${history.map(h => `<tr><td>${h.plate}</td><td>${new Date(h.entryTime).toLocaleTimeString()}</td><td>${new Date(h.exitTime).toLocaleTimeString()}</td><td>$${h.total}</td></tr>`).join('')}</tbody>
+            </table>
+        </div>`;
+};
+
+document.getElementById('m-prof').onclick = () => {
+    document.getElementById('modal').toggle(true);
+   };
+});
+
+window.deleteT = (code) => {
+const types = storage.get('vehicleTypes').filter(t => t.code !== code);
+storage.save('vehicleTypes', types);
+document.querySelector('config-manager').render();
+};
+
+storage.init();
+app.innerHTML = '<login-view></login-view>';
