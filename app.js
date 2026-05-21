@@ -111,3 +111,31 @@ class ProfileModal extends HTMLElement {
     }
     toggle(show) { this.querySelector('#ovl').style.display = show ? 'flex' : 'none'; }
 }
+
+// Barra de menu hamburguesa 
+customElements.define('login-view', LoginView);
+customElements.define('parking-manager', ParkingManager);
+customElements.define('config-manager', ConfigManager);
+customElements.define('profile-modal', ProfileModal);
+
+const app = document.getElementById('app');
+
+window.addEventListener('login-ok', () => {
+    app.innerHTML = `
+        <div class="main-container">
+            <div class="sidebar">
+                <div class="brand">PARKING</div>
+                <div class="menu-item active" id="m-reg">📋 Registro</div>
+                <div class="menu-item" id="m-money">📈Historial</div>
+                <div class="menu-item" id="m-edit">⚙️ Tipo de vehiculo</div>
+                <div class="menu-item" id="m-prof"> 👤 Perfil</div>
+                <div class="menu-item" onclick="location.reload()" style="margin-top:auto; color:#fffff">🚪 Salir</div>
+            </div>
+            <div class="content" id="view">
+                <parking-manager></parking-manager>
+            </div>
+        </div>
+        <profile-modal id="modal"></profile-modal>
+    `;
+}
+)
