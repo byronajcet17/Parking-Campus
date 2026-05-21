@@ -75,3 +75,39 @@ class ConfigManager extends HTMLElement {
         };
     }
 }
+
+
+// 4.  Perfil
+class ProfileModal extends HTMLElement {
+    connectedCallback() {
+        this.render();
+    }
+    render() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        this.innerHTML = `
+            <div class="modal-overlay" id="ovl">
+                <div class="modal-content">
+                    <h3>Mi Perfil</h3>
+                    <label>Nombre:</label><input type="text" id="p-name" value="${user.name}">
+                    <label>Email:</label><input type="email" id="p-email" value="${user.email}">
+                    <label>Contraseña:</label><input type="password" id="p-pass" value="${user.pass}">
+                    <div style="margin-top:20px; display:flex; gap:10px;">
+                        <button id="p-save">Actualizar</button>
+                        <button class="secondary" id="p-close">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        this.querySelector('#p-save').onclick = () => {
+            localStorage.setItem('user', JSON.stringify({
+                name: this.querySelector('#p-name').value,
+                email: this.querySelector('#p-email').value,
+                pass: this.querySelector('#p-pass').value
+            }));
+            alert("Perfil actualizado correctamente");
+            this.toggle(false);
+        };
+        this.querySelector('#p-close').onclick = () => this.toggle(false);
+    }
+    toggle(show) { this.querySelector('#ovl').style.display = show ? 'flex' : 'none'; }
+}
