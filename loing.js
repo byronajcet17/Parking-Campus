@@ -1,4 +1,4 @@
-// MANEJO DE DATOS
+// DATOS
 const storage = {
     get(key) { return JSON.parse(localStorage.getItem(key)) || []; },
     save(key, data) { localStorage.setItem(key, JSON.stringify(data)); },
@@ -19,7 +19,7 @@ const storage = {
 
 
 
-// 1. Vista de Login
+// Login
 class LoginView extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
