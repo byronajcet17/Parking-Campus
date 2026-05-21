@@ -38,4 +38,4 @@ class ParkingManager extends HTMLElement {
         `;
         this.querySelector('#btnReg').onclick = () => this.registerEntry();
     }
-}
+}   
