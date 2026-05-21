@@ -88,8 +88,8 @@ class ProfileModal extends HTMLElement {
             <div class="modal-overlay" id="ovl">
                 <div class="modal-content">
                     <h3>Mi Perfil</h3>
-                    <label>Nombre:</label><input type="text" id="p-name" value="${user.name}">
-                    <label>Email:</label><input type="email" id="p-email" value="${user.email}">
+                    <label>Nombre:</label><input type="text" id="p-name" value="${user.name}"><br>
+                    <label>Email:</label><input type="email" id="p-email" value="${user.email}"<br>
                     <label>Contraseña:</label><input type="password" id="p-pass" value="${user.pass}">
                     <div style="margin-top:20px; display:flex; gap:10px;">
                         <button id="p-save">Actualizar</button>
@@ -137,7 +137,6 @@ window.addEventListener('login-ok', () => {
         </div>
         <profile-modal id="modal"></profile-modal>
     `;
-
 
 // Funcion del menu
 const updateActive = (id) => {
