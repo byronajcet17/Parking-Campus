@@ -1,0 +1,108 @@
+:root {
+    --primary-blue: #1e1e78;
+    --light-blue: #2d2d8a;
+    --white: #ffffff;
+    --gray-bg: #f0f2f5;
+    --text-dark: #333;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--gray-bg);
+    color: var(--text-dark);
+}
+
+/* Layout */
+.main-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/*Color de letras y de fondo de menu*/
+.sidebar {
+    width: 280px;
+    background-color: var(--primary-blue);
+    color:      white;
+    padding-top: 20px;
+}
+    
+.brand {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    gap: 10px;
+}
+/*Menu de */
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    border-radius: 0;
+}
+
+.menu-item:hover {
+    background-color: var(--light-blue);
+}
+
+.menu-item.active {
+    background-color: var(--gray-bg);
+    color: var(--primary-blue);
+    border-radius: 30px 0 0 30px;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+/* Contenido Principal */
+.content {
+    flex: 1;
+    padding: 40px;
+}
+
+.card {
+    background: rgb(255, 255, 255);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+/* Tablas y Formularios */
+table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+th { color: #000000; font-size: 0.9rem; }
+
+input, select {
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+button {
+    padding: 10px 20px;
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button.secondary { background: #6c757d; }
+button.danger { background:     #dc3545; }
+
+/* perfil */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center;
+    z-index: 1000;
+}
+.modal-content { background: white; padding: 30px; border-radius: 12px; width: 400px; }
